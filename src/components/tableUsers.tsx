@@ -15,18 +15,14 @@ import api from "@/services/api";
 const TableUsers = ({ openSheet }: { openSheet: (userId: number) => void }) => {
   const [users, setUsers] = useState<Array<IUser>>([]);
 
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      setLoading(true);
       try {
         const response = await api.get("/api/users");
         setUsers(response.data.data);
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
 
