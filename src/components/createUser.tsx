@@ -47,7 +47,6 @@ const CreateUser = () => {
     },
   });
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data);
     try {
       await api.post("/api/users", {
         firstName: data.firstName,
