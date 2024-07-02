@@ -1,39 +1,43 @@
 import { useContext } from "react";
-import { Navigate, Outlet, RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+  useLocation,
+} from "react-router-dom";
 import Login from "./pages/auth/Login";
 import { AuthProvider } from "./providers/AuthProvider";
 import { AuthContext } from "./context/AuthContext";
 import Users from "./pages/users";
 import Account from "./pages/account";
-
-
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 const PrivateAdminRoutes = () => {
   const { isAuth, loading, user } = useContext(AuthContext);
 
   const location = useLocation();
 
-  if(loading) return <div>Loading...</div>
+  if (loading) return <div>Loading...</div>;
 
-  if(!isAuth) return <Navigate to="/login" state={{ from: location }} />
+  if (!isAuth) return <Navigate to="/login" state={{ from: location }} />;
 
-  if(user?.role !== "admin") return <Navigate to="/account" state={{ from: location }} />
-  return <Outlet/>
-
-}
+  if (user?.role !== "admin")
+    return <Navigate to="/account" state={{ from: location }} />;
+  return <Outlet />;
+};
 
 const PrivateRoutes = () => {
   const { isAuth, loading } = useContext(AuthContext);
 
   const location = useLocation();
 
-  if(loading) return <div>Loading...</div>
+  if (loading) return <div>Loading...</div>;
 
-  if(!isAuth) return <Navigate to="/login" state={{ from: location }} />
+  if (!isAuth) return <Navigate to="/login" state={{ from: location }} />;
 
-  return <Outlet/>
-
-}
+  return <Outlet />;
+};
 
 const router = createBrowserRouter([
   {
@@ -46,13 +50,13 @@ const router = createBrowserRouter([
       },
       {
         path: "",
-        element: <PrivateAdminRoutes/>,
+        element: <PrivateAdminRoutes />,
         children: [
           {
             path: "/",
-            element: <Users/>
-          }
-        ]
+            element: <Users />,
+          },
+        ],
       },
       {
         path: "",
@@ -60,19 +64,20 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/account",
-            element: <Account/>
-          }
-        ]
-      }
+            element: <Account />,
+          },
+        ],
+      },
     ],
   },
 ]);
 
 function App() {
-
-
-
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
 export default App;

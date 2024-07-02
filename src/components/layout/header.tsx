@@ -11,6 +11,7 @@ import {
 import { useContext, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import api from "@/services/api";
+import { ModeToggle } from "../modeToggle";
 
 const Header = ({ isAdmin = false }: { isAdmin?: boolean }) => {
   const { handleLogout, user } = useContext(AuthContext);
@@ -48,30 +49,36 @@ const Header = ({ isAdmin = false }: { isAdmin?: boolean }) => {
         </span>
         Coinlyx
       </a>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Avatar>
-            <AvatarFallback>{user?.firstName[0].toUpperCase()}{user?.lastName[0].toUpperCase()}</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          {isAdmin && (
-            <>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={downloadLogs}>
-                <FolderDown className="h-4 w-4 mr-2" />
-                <span>Dowload Logs</span>
-              </DropdownMenuItem>
-            </>
-          )}
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={handleLogout}>
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>LogOut</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="inline-flex gap-2">
+        <ModeToggle />
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar>
+              <AvatarFallback>
+                {user?.firstName[0].toUpperCase()}
+                {user?.lastName[0].toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            {isAdmin && (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={downloadLogs}>
+                  <FolderDown className="h-4 w-4 mr-2" />
+                  <span>Dowload Logs</span>
+                </DropdownMenuItem>
+              </>
+            )}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>LogOut</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </header>
   );
 };
