@@ -12,7 +12,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import api from "@/services/api";
 
-const Header = ({ isAdmin }: { isAdmin: boolean }) => {
+const Header = ({ isAdmin = false }: { isAdmin?: boolean }) => {
   const { handleLogout } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const downloadLogs = async () => {
