@@ -13,7 +13,7 @@ import { AuthContext } from "@/context/AuthContext";
 import api from "@/services/api";
 
 const Header = ({ isAdmin = false }: { isAdmin?: boolean }) => {
-  const { handleLogout } = useContext(AuthContext);
+  const { handleLogout, user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const downloadLogs = async () => {
     setLoading(true);
@@ -51,7 +51,7 @@ const Header = ({ isAdmin = false }: { isAdmin?: boolean }) => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarFallback>MZ</AvatarFallback>
+            <AvatarFallback>{user?.firstName[0].toUpperCase()}{user?.lastName[0].toUpperCase()}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
