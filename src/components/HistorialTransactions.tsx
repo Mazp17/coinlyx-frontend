@@ -1,4 +1,4 @@
-import { DollarSign } from "lucide-react";
+import { CircleHelp, DollarSign } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -48,6 +48,28 @@ const HistorialTransactions = ({
               </div>
             </div>
           )}
+
+          {(transactions.length === 0 && !loading) && (
+            <div
+              className={
+                "inline-flex px-2 py-2 justify-between w-full hover:bg-muted "}
+            >
+              <div className="inline-flex gap-2">
+                <div
+                  className={
+                    "p-2 rounded-full bg-muted-foreground/50 text-secondary-foreground "
+                  }
+                >
+                  <CircleHelp />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <span className="text-md font-semibold">
+                    Not transactions yet
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
           {!loading &&
             transactions.map((transaction) => (
               <TransactionCard key={transaction.id} transaction={transaction} />
@@ -63,9 +85,17 @@ interface TransactionCardProps {
   transaction: ITransaction;
 }
 
-export const TransactionCard = ({ className = "", transaction }: TransactionCardProps) => {
+export const TransactionCard = ({
+  className = "",
+  transaction,
+}: TransactionCardProps) => {
   return (
-    <div className={"inline-flex px-2 py-2 justify-between w-full hover:bg-muted " + className} >
+    <div
+      className={
+        "inline-flex px-2 py-2 justify-between w-full hover:bg-muted " +
+        className
+      }
+    >
       <div className="inline-flex gap-2">
         <div
           className={
