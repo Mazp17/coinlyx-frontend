@@ -54,6 +54,10 @@ const CreateUser = () => {
         lastName: data.lastName,
         email: data.email,
         password: data.password,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+        }
       });
       form.reset();
       toast({
