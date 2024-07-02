@@ -32,10 +32,9 @@ const Login = () => {
       password: "",
     },
   });
-  if(loading) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
-  if(isAuth) return <Navigate to="/" />;
-
+  if (isAuth) return <Navigate to="/" />;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background/70 w-full ">
@@ -45,6 +44,7 @@ const Login = () => {
           <h1 className="text-2xl font-bold">Login</h1>
         </div>
         <FormProvider {...form}>
+          {/* @ts-expect-error este error se debe a que no combinan ambos oeperadores */}
           <form className="space-y-4" onSubmit={form.handleSubmit(handleLogin)}>
             <FormField
               control={form.control}
@@ -72,9 +72,8 @@ const Login = () => {
                 </FormItem>
               )}
             />
-            <Button className="w-full" {...(loading && { disabled: true })}>
+            <Button className="w-full">
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-
               Login
             </Button>
           </form>
