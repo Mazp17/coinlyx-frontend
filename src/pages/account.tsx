@@ -1,6 +1,6 @@
 import { TransactionCard } from "@/components/HistorialTransactions";
+import ModalCreateTransaction from "@/components/createTransaction";
 import Header from "@/components/layout/header";
-import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthContext } from "@/context/AuthContext";
 import ITransaction from "@/interfaces/ITransaction";
@@ -31,7 +31,7 @@ const Account = () => {
       <main className="w-[80%] mt-3 space-y-3">
         <header className="w-full inline-flex justify-between">
           <h1 className="text-lg font-semibold">Your Account</h1>
-          <Button size={"sm"}>New Transaction</Button>
+          <ModalCreateTransaction />
         </header>
         <div className="flex flex-col gap-2">
           <div className="border p-4 rounded-md">
