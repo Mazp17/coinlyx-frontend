@@ -12,7 +12,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import api from "@/services/api";
 
-const Header = () => {
+const Header = ({ isAdmin }: { isAdmin: boolean }) => {
   const { handleLogout } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const downloadLogs = async () => {
@@ -30,7 +30,7 @@ const Header = () => {
 
       document.body.appendChild(link);
       link.click();
-      link.remove()
+      link.remove();
     } catch (err) {
       console.log(err);
     } finally {
@@ -56,11 +56,15 @@ const Header = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={downloadLogs}>
-            <FolderDown className="h-4 w-4 mr-2" />
-            <span>Dowload Logs</span>
-          </DropdownMenuItem>
+          {isAdmin && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={downloadLogs}>
+                <FolderDown className="h-4 w-4 mr-2" />
+                <span>Dowload Logs</span>
+              </DropdownMenuItem>
+            </>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />

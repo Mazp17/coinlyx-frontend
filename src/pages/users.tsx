@@ -26,7 +26,7 @@ const Users = () => {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-background/70 w-full ">
-      <Header />
+      <Header  isAdmin/>
       <main className="w-[80%] mt-3 space-y-2">
         <HistorialTransactions
           loading={loading}
